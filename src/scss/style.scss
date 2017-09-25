@@ -1,0 +1,40 @@
+
+
+$yellow : #FEDA6A;
+$white  : #FFFFFF;
+$dark1  : #3A3335;
+$dark2  : #454851;
+
+
+$navbar-width: 250px;
+
+body {
+	background-color: $dark2;
+	color: white;
+	font-family: sans-serif;
+	margin: 0;
+}
+
+.padding {
+	padding-left: 8px;
+	padding-top: 8px;
+}
+
+.container {
+	display: flex;
+}
+
+.editor {
+	@extend .padding;
+	flex: 6;
+	background-color: $dark1;
+}
+
+.navbar {
+	@extend .padding;
+	flex: 2;
+	height: 100%;
+	left: 0;
+	width: $navbar-width;
+	background-color: $dark2;
+}
