@@ -8176,17 +8176,41 @@ var _user$project$NavbarModel$NavbarModel = function (a) {
 var _user$project$NavbarItemView$navbar_item_view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text(model.name),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(model.description),
-				_1: {ctor: '[]'}
-			}
+			_0: _elm_lang$html$Html_Attributes$class('item'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$a,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$title(model.description),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(model.name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
+
+var _user$project$NavbarHeader$navbar_header = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('header'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('<arachnid>'),
+		_1: {ctor: '[]'}
+	});
 
 var _user$project$NavbarView$navbar_view = function (model) {
 	return A2(
@@ -8196,12 +8220,38 @@ var _user$project$NavbarView$navbar_view = function (model) {
 			_0: _elm_lang$html$Html_Attributes$class('navbar'),
 			_1: {ctor: '[]'}
 		},
-		A2(
-			_elm_lang$core$List$map,
-			function (item) {
-				return _user$project$NavbarItemView$navbar_item_view(item);
-			},
-			model.items));
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('navbar-header'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$NavbarHeader$navbar_header,
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('navbar-list'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$List$map,
+						function (item) {
+							return _user$project$NavbarItemView$navbar_item_view(item);
+						},
+						model.items)),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 
 var _user$project$Main$update = F2(
@@ -8258,6 +8308,10 @@ if (typeof _user$project$EditorView$main !== 'undefined') {
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
     _user$project$Main$main(Elm['Main'], 'Main', undefined);
+}
+Elm['NavbarHeader'] = Elm['NavbarHeader'] || {};
+if (typeof _user$project$NavbarHeader$main !== 'undefined') {
+    _user$project$NavbarHeader$main(Elm['NavbarHeader'], 'NavbarHeader', undefined);
 }
 Elm['NavbarItemModel'] = Elm['NavbarItemModel'] || {};
 if (typeof _user$project$NavbarItemModel$main !== 'undefined') {

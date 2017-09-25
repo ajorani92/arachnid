@@ -1,12 +1,8 @@
 body {
   background-color: #454851;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0; }
-
-.padding, .editor, .navbar {
-  padding-left: 8px;
-  padding-top: 8px; }
 
 .container {
   display: flex; }
@@ -21,3 +17,18 @@ body {
   left: 0;
   width: 250px;
   background-color: #454851; }
+
+.navbar-header {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 40px;
+  padding: 10px; }
+
+.navbar-list .item {
+  text-transform: uppercase;
+  padding: 5px;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: linear; }
+
+.navbar-list .item:hover {
+  background: #3a3335; }
