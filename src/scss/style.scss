@@ -4,13 +4,14 @@ $yellow : #FEDA6A;
 $white  : #FFFFFF;
 $dark1  : #3A3335;
 $dark2  : #454851;
-$grey   : #3a3335;
+$grey1  : #eeeeee;
+$grey2  : #3a3335;
 
 $navbar-width: 250px;
 
 body {
 	background-color: $dark2;
-	color: white;
+	color: $dark1;
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 }
@@ -18,11 +19,35 @@ body {
 
 .container {
 	display: flex;
+	height: 100%;
+}
+
+
+@mixin center-children {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .editor {
-	flex: 6;
-	background-color: $dark1;
+	flex: 8;
+	background-color: $white;
+
+	.popup {
+		@include center-children;
+		height: 100%;
+		background-color: $grey1;
+
+		.menu {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			width: 70%;
+			height: 50%;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			background-color: $white;
+		}
+	}
+
 }
 
 .navbar {
@@ -30,12 +55,15 @@ body {
 	height: 100%;
 	left: 0;
 	width: $navbar-width;
-	background-color: $dark2;
+	background-color: $white;
+	border-right: solid;
+	border-right-width: 2px;
+	border-right-color: $grey2;
 }
 
 .navbar-header {
 	font-family: 'Cutive Mono', monospace;
-	font-size: 40px;
+	font-size: 30px;
 	padding: 10px;
 }
 
@@ -46,9 +74,25 @@ body {
 
 		transition-property: background;
 		transition-duration: 1s;
-		transition-timing-function: linear;
+		transition-timing-function: cubic-bezier(0, 1.31, 1, 1);
+
+		button {
+			text-decoration: none;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+			text-align: left;
+		}
+
+		.item {
+			text-align: left;
+			padding-left: 5px;
+		}
+
 	}
-	.item:hover {
-		background: $grey;
+
+
+	.item .collapsed {
+		background: $grey1;
 	}
 }
