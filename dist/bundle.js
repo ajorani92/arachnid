@@ -8145,11 +8145,286 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
-var _user$project$EditorModel$EditorModel = function (a) {
-	return {temp: a};
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
+var _user$project$EditorRoute$None = {ctor: 'None'};
+var _user$project$EditorRoute$Preview = {ctor: 'Preview'};
+var _user$project$EditorRoute$ComponentSelector = {ctor: 'ComponentSelector'};
+var _user$project$EditorRoute$StylesheetSelector = {ctor: 'StylesheetSelector'};
+
+var _user$project$Msg$ToggleCollapse = function (a) {
+	return {ctor: 'ToggleCollapse', _0: a};
+};
+var _user$project$Msg$SwitchView = function (a) {
+	return {ctor: 'SwitchView', _0: a};
+};
+var _user$project$Msg$None = {ctor: 'None'};
+
+var _user$project$EditorPane$editor_element = F2(
+	function (name, image) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('element'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src(image),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(name),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$EditorPane$editor_section = function (elts) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('section'),
+			_1: {ctor: '[]'}
+		},
+		elts);
+};
+var _user$project$EditorPane$section_header = function (str) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('header'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(str),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$EditorPane$editor_view = function (html) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popup'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('menu'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: html,
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
 };
 
-var _user$project$EditorView$editor_view = function (model) {
+var _user$project$Component$view = _user$project$EditorPane$editor_view(
+	A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$EditorPane$section_header('Components'),
+			_1: {
+				ctor: '::',
+				_0: _user$project$EditorPane$editor_section(
+					{
+						ctor: '::',
+						_0: A2(_user$project$EditorPane$editor_element, 'Test', ''),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$EditorPane$editor_element, 'Test', ''),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}));
+
+var _user$project$Preview$view = _elm_lang$html$Html$text('Preview');
+
+var _user$project$Stylesheet$view = _user$project$EditorPane$editor_view(
+	A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$EditorPane$section_header('Stylesheets'),
+			_1: {
+				ctor: '::',
+				_0: _user$project$EditorPane$editor_section(
+					{
+						ctor: '::',
+						_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+											_1: {
+												ctor: '::',
+												_0: A2(_user$project$EditorPane$editor_element, 'Bulma.css', 'static/img/bulma.png'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}));
+
+var _user$project$Editor$editor_view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -8159,45 +8434,129 @@ var _user$project$EditorView$editor_view = function (model) {
 		},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text(model.temp),
+			_0: function () {
+				var _p0 = model.route;
+				switch (_p0.ctor) {
+					case 'None':
+						return A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{ctor: '[]'});
+					case 'Preview':
+						return _user$project$Preview$view;
+					case 'StylesheetSelector':
+						return _user$project$Stylesheet$view;
+					default:
+						return _user$project$Component$view;
+				}
+			}(),
 			_1: {ctor: '[]'}
 		});
 };
-
-var _user$project$NavbarItemModel$NavbarItemModel = F2(
+var _user$project$Editor$EditorModel = F2(
 	function (a, b) {
-		return {name: a, description: b};
+		return {temp: a, route: b};
 	});
 
-var _user$project$NavbarModel$NavbarModel = function (a) {
-	return {items: a};
-};
-
-var _user$project$NavbarItemView$navbar_item_view = function (model) {
+var _user$project$NavbarItem$navbar_item_view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('item'),
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'item', _1: true},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'collapsed', _1: model.collapsed},
+						_1: {ctor: '[]'}
+					}
+				}),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$a,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$title(model.description),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(model.name),
-					_1: {ctor: '[]'}
-				}),
+			_0: function () {
+				var _p0 = model.children;
+				if (_p0._0.ctor === '[]') {
+					return A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$Msg$SwitchView(model.route)),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(model.name),
+							_1: {ctor: '[]'}
+						});
+				} else {
+					var _p1 = model.collapsed;
+					if (_p1 === false) {
+						return A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('items'),
+								_1: {ctor: '[]'}
+							},
+							A2(
+								_elm_lang$core$List$append,
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(
+												_user$project$Msg$ToggleCollapse(model.name)),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(model.name),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								A2(
+									_elm_lang$core$List$map,
+									function (item) {
+										return _user$project$NavbarItem$navbar_item_view(item);
+									},
+									_p0._0)));
+					} else {
+						return A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$Msg$ToggleCollapse(model.name)),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(model.name),
+								_1: {ctor: '[]'}
+							});
+					}
+				}
+			}(),
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$NavbarItem$empty_items = {ctor: '[]'};
+var _user$project$NavbarItem$NavbarItemModel = F5(
+	function (a, b, c, d, e) {
+		return {name: a, description: b, route: c, collapsed: d, children: e};
+	});
+var _user$project$NavbarItem$Children = function (a) {
+	return {ctor: 'Children', _0: a};
+};
+var _user$project$NavbarItem$no_sub_items = _user$project$NavbarItem$Children(_user$project$NavbarItem$empty_items);
 
 var _user$project$NavbarHeader$navbar_header = A2(
 	_elm_lang$html$Html$div,
@@ -8212,7 +8571,7 @@ var _user$project$NavbarHeader$navbar_header = A2(
 		_1: {ctor: '[]'}
 	});
 
-var _user$project$NavbarView$navbar_view = function (model) {
+var _user$project$Navbar$navbar_view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -8246,17 +8605,48 @@ var _user$project$NavbarView$navbar_view = function (model) {
 					A2(
 						_elm_lang$core$List$map,
 						function (item) {
-							return _user$project$NavbarItemView$navbar_item_view(item);
+							return _user$project$NavbarItem$navbar_item_view(item);
 						},
 						model.items)),
 				_1: {ctor: '[]'}
 			}
 		});
 };
+var _user$project$Navbar$NavbarModel = function (a) {
+	return {items: a};
+};
 
+var _user$project$Main$switch_view = F2(
+	function (model, route) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				editor_model: A2(_user$project$Editor$EditorModel, 'Temp', route)
+			});
+	});
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		return model;
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'None':
+				return model;
+			case 'SwitchView':
+				return A2(_user$project$Main$switch_view, model, _p0._0);
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						navbar_model: _user$project$Navbar$NavbarModel(
+							A2(
+								_elm_lang$core$List$map,
+								function (item) {
+									return _elm_lang$core$Native_Utils.eq(item.name, _p0._0) ? _elm_lang$core$Native_Utils.update(
+										item,
+										{collapsed: !item.collapsed}) : item;
+								},
+								model.navbar_model.items))
+					});
+		}
 	});
 var _user$project$Main$view = function (model) {
 	return A2(
@@ -8268,10 +8658,10 @@ var _user$project$Main$view = function (model) {
 		},
 		{
 			ctor: '::',
-			_0: _user$project$NavbarView$navbar_view(model.navbar_model),
+			_0: _user$project$Navbar$navbar_view(model.navbar_model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$EditorView$editor_view(model.editor_model),
+				_0: _user$project$Editor$editor_view(model.editor_model),
 				_1: {ctor: '[]'}
 			}
 		});
@@ -8282,52 +8672,79 @@ var _user$project$Main$MainModel = F2(
 	});
 var _user$project$Main$init_model = A2(
 	_user$project$Main$MainModel,
-	_user$project$NavbarModel$NavbarModel(
+	_user$project$Navbar$NavbarModel(
 		{
 			ctor: '::',
-			_0: A2(_user$project$NavbarItemModel$NavbarItemModel, 'Home', 'Brings you home'),
+			_0: A5(_user$project$NavbarItem$NavbarItemModel, 'Preview', 'Brings to the preview', _user$project$EditorRoute$Preview, true, _user$project$NavbarItem$no_sub_items),
 			_1: {
 				ctor: '::',
-				_0: A2(_user$project$NavbarItemModel$NavbarItemModel, 'Create New', 'Creates new page'),
+				_0: A5(
+					_user$project$NavbarItem$NavbarItemModel,
+					'Create New',
+					'Creates new page',
+					_user$project$EditorRoute$None,
+					true,
+					_user$project$NavbarItem$Children(
+						{
+							ctor: '::',
+							_0: A5(_user$project$NavbarItem$NavbarItemModel, 'Component', 'Puts a new thing on the page.', _user$project$EditorRoute$ComponentSelector, true, _user$project$NavbarItem$no_sub_items),
+							_1: {
+								ctor: '::',
+								_0: A5(_user$project$NavbarItem$NavbarItemModel, 'Stylesheet', 'New base CSS framework', _user$project$EditorRoute$StylesheetSelector, true, _user$project$NavbarItem$no_sub_items),
+								_1: {ctor: '[]'}
+							}
+						})),
 				_1: {ctor: '[]'}
 			}
 		}),
-	_user$project$EditorModel$EditorModel('Temp'));
+	A2(_user$project$Editor$EditorModel, 'Temp', _user$project$EditorRoute$Preview));
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
 	{model: _user$project$Main$init_model, update: _user$project$Main$update, view: _user$project$Main$view})();
 
 var Elm = {};
-Elm['EditorModel'] = Elm['EditorModel'] || {};
-if (typeof _user$project$EditorModel$main !== 'undefined') {
-    _user$project$EditorModel$main(Elm['EditorModel'], 'EditorModel', undefined);
+Elm['Component'] = Elm['Component'] || {};
+if (typeof _user$project$Component$main !== 'undefined') {
+    _user$project$Component$main(Elm['Component'], 'Component', undefined);
 }
-Elm['EditorView'] = Elm['EditorView'] || {};
-if (typeof _user$project$EditorView$main !== 'undefined') {
-    _user$project$EditorView$main(Elm['EditorView'], 'EditorView', undefined);
+Elm['Editor'] = Elm['Editor'] || {};
+if (typeof _user$project$Editor$main !== 'undefined') {
+    _user$project$Editor$main(Elm['Editor'], 'Editor', undefined);
+}
+Elm['EditorPane'] = Elm['EditorPane'] || {};
+if (typeof _user$project$EditorPane$main !== 'undefined') {
+    _user$project$EditorPane$main(Elm['EditorPane'], 'EditorPane', undefined);
+}
+Elm['EditorRoute'] = Elm['EditorRoute'] || {};
+if (typeof _user$project$EditorRoute$main !== 'undefined') {
+    _user$project$EditorRoute$main(Elm['EditorRoute'], 'EditorRoute', undefined);
 }
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
     _user$project$Main$main(Elm['Main'], 'Main', undefined);
 }
+Elm['Msg'] = Elm['Msg'] || {};
+if (typeof _user$project$Msg$main !== 'undefined') {
+    _user$project$Msg$main(Elm['Msg'], 'Msg', undefined);
+}
+Elm['Navbar'] = Elm['Navbar'] || {};
+if (typeof _user$project$Navbar$main !== 'undefined') {
+    _user$project$Navbar$main(Elm['Navbar'], 'Navbar', undefined);
+}
 Elm['NavbarHeader'] = Elm['NavbarHeader'] || {};
 if (typeof _user$project$NavbarHeader$main !== 'undefined') {
     _user$project$NavbarHeader$main(Elm['NavbarHeader'], 'NavbarHeader', undefined);
 }
-Elm['NavbarItemModel'] = Elm['NavbarItemModel'] || {};
-if (typeof _user$project$NavbarItemModel$main !== 'undefined') {
-    _user$project$NavbarItemModel$main(Elm['NavbarItemModel'], 'NavbarItemModel', undefined);
+Elm['NavbarItem'] = Elm['NavbarItem'] || {};
+if (typeof _user$project$NavbarItem$main !== 'undefined') {
+    _user$project$NavbarItem$main(Elm['NavbarItem'], 'NavbarItem', undefined);
 }
-Elm['NavbarItemView'] = Elm['NavbarItemView'] || {};
-if (typeof _user$project$NavbarItemView$main !== 'undefined') {
-    _user$project$NavbarItemView$main(Elm['NavbarItemView'], 'NavbarItemView', undefined);
+Elm['Preview'] = Elm['Preview'] || {};
+if (typeof _user$project$Preview$main !== 'undefined') {
+    _user$project$Preview$main(Elm['Preview'], 'Preview', undefined);
 }
-Elm['NavbarModel'] = Elm['NavbarModel'] || {};
-if (typeof _user$project$NavbarModel$main !== 'undefined') {
-    _user$project$NavbarModel$main(Elm['NavbarModel'], 'NavbarModel', undefined);
-}
-Elm['NavbarView'] = Elm['NavbarView'] || {};
-if (typeof _user$project$NavbarView$main !== 'undefined') {
-    _user$project$NavbarView$main(Elm['NavbarView'], 'NavbarView', undefined);
+Elm['Stylesheet'] = Elm['Stylesheet'] || {};
+if (typeof _user$project$Stylesheet$main !== 'undefined') {
+    _user$project$Stylesheet$main(Elm['Stylesheet'], 'Stylesheet', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

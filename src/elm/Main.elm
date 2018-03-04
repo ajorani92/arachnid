@@ -28,7 +28,7 @@ type alias MainModel =
 
 init_model : MainModel
 init_model = 
-      MainModel (NavbarModel [ NavbarItem.NavbarItemModel "Home" "Brings you home" EditorRoute.Preview True NavbarItem.no_sub_items
+      MainModel (NavbarModel [ NavbarItem.NavbarItemModel "Preview" "Brings to the preview" EditorRoute.Preview True NavbarItem.no_sub_items
                              , NavbarItem.NavbarItemModel "Create New" "Creates new page" EditorRoute.None True 
                                 (NavbarItem.Children 
                                   [ NavbarItem.NavbarItemModel "Component" "Puts a new thing on the page." EditorRoute.ComponentSelector True NavbarItem.no_sub_items
